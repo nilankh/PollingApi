@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-// options controller
+// requiring options controller
 const optionsController = require('../controllers/optionsController');
 
 router.delete('/:id/delete', optionsController.delete);
