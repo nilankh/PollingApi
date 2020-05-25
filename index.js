@@ -9,9 +9,13 @@ const db = require('./config/mongoose');
 // creating express app
 const app = express();
 
-app.get('/', (req, res) =>{
-    res.json({"message": "welcome"})
-});
+// app.get('/', (req, res) =>{
+//     res.json({"message": "welcome"})
+// });
+//use express router
+app.use('/', require('./routes'));
+
+
 
 // Listen for requests
 app.listen(port, function(err){
