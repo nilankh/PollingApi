@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Creat questions Schema
 const questionSchema = new mongoose.Schema({
     title:{
-        title: String,
+        type: String,
         required: true
     },
     options: [

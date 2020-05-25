@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const Question = require('../models/question');
 const Option = require('../models/optionSchema');
 
-// vote link
-const url = 'http://localhost:8000/options/';
 
 //questions
 module.exports.questionCreate = function(req, res){
@@ -29,41 +27,21 @@ module.exports.questionCreate = function(req, res){
     }
 }
 
-// add options to specific questions
-module.exports.addOptions = function(req, res){
-    try {
-        
-
-        // Checkign if exists otherwise just return
-        let question = Question.findById(req.params.id);
-        if(question){
-            let option = Option.create({
-                text: req.body.text,
-                votes: req.body.votes,
-                question: req.params.id
-            });
-            
-        }
-
-    } catch (err) {
-        
-    }
-}
 
 // To view a question
-module.exports.view = function(req, res){
+module.exports.view = async function(req, res){
     
-    let question = Question.findById(req.params.id)
+    let question = await Question.findById(req.params.id)
     .populate('options')
-    return res.json({question:question})
+    return res.json({question:question});
 }
 
 // delete questions
-module.exports.deleteQuestion = function(req, res){
+module.exports.deleteQuestion = async function(req, res){
     try {
-        let question = Question.findById(req.params.id);
+        let question = await Question.findById(req.params.id);
         question.remove();
-        
+        await Option.deleteMany({question:req.params.id});
         return res.json({
             messgae: "Question and Options deleted!!!"
         });
