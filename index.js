@@ -3,6 +3,9 @@ const express = require('express');
 // port
 const port = 8000;
 
+// database
+const db = require('./config/mongoose');
+
 // creating express app
 const app = express();
 
