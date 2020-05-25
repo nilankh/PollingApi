@@ -4,10 +4,12 @@ const router = express.Router();
 
 // requiring questions controller
 const questionController = require('../controllers/questionsController');
+const optionController = require('../controllers/optionsController');
+
 
 router.post('/create', questionController.questionCreate);
-router.post('/:id/options/create', questionController.addOptions);
-router.delete('/:id/delete', questionController.deleteQuestion);
+router.post('/:id/options/create', optionController.addOption);
+router.post('/:id/delete', questionController.deleteQuestion);
 router.get('/:id', questionController.view);
 
 
